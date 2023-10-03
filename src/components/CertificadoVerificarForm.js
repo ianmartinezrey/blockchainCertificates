@@ -34,6 +34,7 @@ function CertificadoVerificarForm(props) {
         }catch(err){
             console.log(err.message)
             Swal.fire('Certificado no encontrado', '', 'error')
+            setShowResults(false)
             setbut_disable(false);
         }
     }
