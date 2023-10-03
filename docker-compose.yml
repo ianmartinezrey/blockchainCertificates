@@ -1,0 +1,18 @@
+version: "3"
+services:
+  ganache:
+    container_name: ganache
+    build:
+      context: .
+      dockerfile: Dockerfile.ganache
+    ports:
+      - "8545:8545"   
+  dapp:
+    container_name: dapp
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - ganache
