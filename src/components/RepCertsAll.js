@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import smart_contract from '../abis/CertificadosAcademicos.json';
 import Web3 from 'web3';
-import logo from '../logo.png';
 import '../css/style_global.css'
 
 import { Table, Card, Container } from 'react-bootstrap';
@@ -45,7 +44,7 @@ class RepCertsAll extends Component {
 
         let insts = await contract.methods.getAllInstituciones().call({ from: accounts[0] })
         const instituciones = new Map();
-        insts.map(cert=>{ instituciones.set(cert.institucion, cert)})
+        insts.map(cert=>(instituciones.set(cert.institucion, cert)))
         this.setState({ instituciones })
 
         let certemit = await contract.methods.getAllCertificados().call({ from: accounts[0] })

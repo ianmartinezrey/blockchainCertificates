@@ -5,7 +5,6 @@ import { Web3Storage } from 'web3.storage'
 
 function CertificadoCrearForm(props) {
     const {contract, account} = props;  
-    const [ipfsfile, setipfsfile] = useState('');
     const [estudiante_address, setestudiante_address] = useState('');
     const [estudiante_name, setestudiante_name] = useState('');
     const [fecha_emision, setfecha_emision] = useState('');
@@ -28,7 +27,7 @@ function CertificadoCrearForm(props) {
         }
     
     const uploadFile = async(fileInput) => {
-        const client = new Web3Storage({ token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDM0NUQzNjA4NjM5Y0Y5N0M1ZjBjMGM3MkU0NDE4QkQ2NTE2MjEzNzAiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2OTYwMTI2NjcxMzksIm5hbWUiOiJjZXJ0cyJ9.mO8ryR2Z8yOX9sC-8-BQsCmSpImx9q50h8hmhFKia9c' })
+        const client = new Web3Storage({ token: process.env.REACT_APP_WEB3_STORAGE_KEY })
         const rootCid = await client.put(fileInput.files) // Promise<CIDString>
         console.log(rootCid)
         return rootCid
@@ -118,7 +117,6 @@ function CertificadoCrearForm(props) {
                 <Form.Group className="mb-3" controlId="ipfsfile" >
                     <Form.Label>Certificado</Form.Label>
                     <Form.Control type="file"  
-                        onChange={(e)=>inputChangeHandler(setipfsfile, e)}
                         required 
                     />
                 </Form.Group>

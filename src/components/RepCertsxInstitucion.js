@@ -44,7 +44,7 @@ class RepCertsxInstitucion extends Component {
 
         let certs = await contract.methods.getCertsxInstitucion(accounts[0]).call({ from: accounts[0] })
         const certemit = []
-        certs.map(cert =>{
+        certs.forEach(cert =>{
             if(cert.ipfsHash.length > 0){
                 certemit.push(cert)
             }

@@ -45,7 +45,7 @@ class CertificadoVerificar extends Component {
 
         let insts = await contract.methods.getAllInstituciones().call({ from: accounts[0] })
         const instituciones = new Map();
-        insts.map(cert=>{ instituciones.set(cert.institucion, cert)})
+        insts.map(cert=>( instituciones.set(cert.institucion, cert)))
         this.setState({ instituciones })
 
         } else {

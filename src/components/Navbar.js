@@ -1,8 +1,6 @@
 import React from 'react';
-import { Link } from "react-router-dom";
 import { Navbar, Nav, Button, NavItem, NavDropdown } from 'react-bootstrap';
 
-import * as FaIcons from 'react-icons/fa';
 
 
 const Navigation = ({ account }) => {

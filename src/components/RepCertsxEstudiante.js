@@ -44,12 +44,12 @@ class RepCertsxEstudiante extends Component {
 
         let insts = await contract.methods.getAllInstituciones().call({ from: accounts[0] })
         const instituciones = new Map();
-        insts.map(cert=>{ instituciones.set(cert.institucion, cert)})
+        insts.map(cert=>( instituciones.set(cert.institucion, cert)))
         this.setState({ instituciones })
 
         let certs = await contract.methods.getCertsxEstudiante(accounts[0]).call({ from: accounts[0] })
         const certemit = []
-        certs.map(cert =>{
+        certs.forEach(cert => {
             if(cert.ipfsHash.length > 0){
                 certemit.push(cert)
             }
