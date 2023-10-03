@@ -1,17 +1,15 @@
 import { useState } from 'react';
-import { Button, Modal, Form } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import { Web3Storage } from 'web3.storage'
 
 function CertificadoCrearForm(props) {
     const {contract, account} = props;  
-    const [ipfsHash, setipfsHash] = useState('');
     const [ipfsfile, setipfsfile] = useState('');
     const [estudiante_address, setestudiante_address] = useState('');
     const [estudiante_name, setestudiante_name] = useState('');
     const [fecha_emision, setfecha_emision] = useState('');
     const [titulo, settitulo] = useState('');
-    const [imageUrl, setImageUrl] = useState('')
     const [but_disable, setbut_disable] = useState('');
     const [but_text, setbut_text] = useState('Crear');
     
@@ -20,7 +18,7 @@ function CertificadoCrearForm(props) {
     }
 
     const addcert = async (ipfsHash, estudiante_address, estudiante_name, fecha_emision, titulo) => {
-        let addcert = await contract.methods.emitirCertificado(
+        await contract.methods.emitirCertificado(
             ipfsHash,
             estudiante_address,
             estudiante_name,
@@ -42,7 +40,6 @@ function CertificadoCrearForm(props) {
         await Swal.fire({
             title: 'Certificado',
             text: 'Por favor confirma que deseas crear el certificado',
-            icon: 'success',
             showCancelButton: true,
             icon: 'question',
             
@@ -59,13 +56,6 @@ function CertificadoCrearForm(props) {
                                     .then((result3) => {
                                         window.location.href = "/verificarcertificado?id=" + cid;
                                     })
-                                    setipfsHash('')
-                                    setipfsfile('')
-                                    setestudiante_address('')
-                                    setfecha_emision('')
-                                    settitulo('')
-                                    setbut_disable(false)
-                                    setbut_text('Crear')
                                 }) 
                         })
                         .catch(err => {

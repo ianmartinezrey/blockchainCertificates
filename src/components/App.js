@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import '../css/style_global.css'
 
 import Home from './Home';
-import Footer from './Footer';
 import Institucion from './Institucion';
 import CertificadoCrear from './CertificadoCrear'
 import RepCertsAll from './RepCertsAll'

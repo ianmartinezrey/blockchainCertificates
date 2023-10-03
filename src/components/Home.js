@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 //import smart_contract from '../abis/Migrations.json';
 import smart_contract from '../abis/CertificadosAcademicos.json';
 import Web3 from 'web3';
-import logo from '../logo.png';
 import Navigation from './Navbar';
 
 

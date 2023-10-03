@@ -19,7 +19,7 @@ function InstitucionCrud(props) {
 
     const addinst = async (institucion_address, institucion_name, resolucion) => {
         try {
-            let addinst = await contract.methods.agregarInstitucion(
+            await contract.methods.agregarInstitucion(
                 institucion_address,
                 institucion_name,
                 resolucion

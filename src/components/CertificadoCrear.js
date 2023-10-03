@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import smart_contract from '../abis/CertificadosAcademicos.json';
 import Web3 from 'web3';
-import logo from '../logo.png';
 import img from '../img/secure_cert.png'
 
-import { Form, Card, Container } from 'react-bootstrap';
+import { Card, Container } from 'react-bootstrap';
 import Navigation from './Navbar';
 import CertificadoCrearForm from './CertificadoCrearForm'
 
@@ -69,7 +68,7 @@ class CertificadoCrear extends Component {
                     <Card.Body className='div_gradient2'>
                       <div className="row">
                         <div className="col col-lg-5 text-center">
-                          <img src={img} />
+                          <img src={img} alt='img' />
                         </div>
                         <div className="col col-lg-7">
                           <CertificadoCrearForm contract={this.state.contract} account={this.state.account} />
