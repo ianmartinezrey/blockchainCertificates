@@ -57,7 +57,7 @@ function CertificadoVerificarForm(props) {
                                 />
                             )}
                             <div className='row'>&nbsp;</div>
-                            <a target='new' href={`https://${certificado.ipfsHash}.ipfs.w3s.link/`} >IPFS</a>
+                            <a target='new' href={`https://ipfs.io/ipfs/${certificado.ipfsHash}`} >IPFS</a>
                             <div className='row'>&nbsp;</div>
                             <div className='alert alert-success'>
                                 Certificado V&aacute;lido!

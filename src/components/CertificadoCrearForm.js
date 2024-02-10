@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import Swal from 'sweetalert2';
-import { Web3Storage } from 'web3.storage'
+import FormData from 'form-data';
 
 function CertificadoCrearForm(props) {
     const {contract, account} = props;  
@@ -26,10 +26,41 @@ function CertificadoCrearForm(props) {
         ).send({ from: account });
         }
     
+        
     const uploadFile = async(fileInput) => {
-        const client = new Web3Storage({ token: process.env.REACT_APP_WEB3_STORAGE_KEY })
-        const rootCid = await client.put(fileInput.files) // Promise<CIDString>
-        console.log(rootCid)
+        const formData = new FormData();
+        console.log(fileInput)
+        console.log(fileInput.files[0])
+        formData.append("file", fileInput.files[0])
+
+        const pinataMetadata = JSON.stringify({
+            name: fileInput.files[0].name,
+        });
+        formData.append('pinataMetadata', pinataMetadata);
+        
+        const pinataOptions = JSON.stringify({
+            cidVersion: 0,
+        })
+        formData.append('pinataOptions', pinataOptions);
+
+        const options = {
+            method: 'POST',
+            headers: {
+              accept: 'application/json',
+              authorization: 'Bearer ' + process.env.REACT_APP_WEB3_STORAGE_KEY
+            }
+        };
+          
+        options.body = formData;
+          
+        const rootCid = fetch('https://api.pinata.cloud/pinning/pinFileToIPFS', options)
+            .then(response => response.json())
+            .then((response) => {
+                console.log(response)
+                return response.IpfsHash;
+            })
+            .catch(err => console.error(err));
+
         return rootCid
     }
     
@@ -48,10 +79,10 @@ function CertificadoCrearForm(props) {
                     const fileInput = document.querySelector('input[type="file"]')
                     uploadFile(fileInput)
                         .then(cid => {
-                            console.log('https://' + cid + '.ipfs.w3s.link/')
+                            console.log('https://ipfs.io/ipfs/' + cid)
                             addcert(cid, estudiante_address, estudiante_name, fecha_emision, titulo)
                                 .then((result2) => {
-                                    Swal.fire('Certificado creado', '<a href="https://' + cid + '.ipfs.w3s.link/">IPFS</a>', 'success')
+                                    Swal.fire('Certificado creado', '<a href="https://ipfs.io/ipfs/' + cid + '">IPFS</a>', 'success')
                                     .then((result3) => {
                                         window.location.href = "/verificarcertificado?id=" + cid;
                                     })
